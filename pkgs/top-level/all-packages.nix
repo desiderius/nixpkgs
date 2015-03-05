@@ -6907,6 +6907,8 @@ let
 
   nss = lowPrio (callPackage ../development/libraries/nss { });
 
+  nss_wrapper = callPackage ../development/libraries/nss_wrapper { };
+
   nssTools = callPackage ../development/libraries/nss {
     includeTools = true;
   };
@@ -7304,6 +7306,8 @@ let
 
   snappy = callPackage ../development/libraries/snappy { };
 
+  socket_wrapper = callPackage ../development/libraries/socket_wrapper { };
+
   sodium = callPackage ../development/libraries/sodium {};
 
   sofia_sip = callPackage ../development/libraries/sofia-sip { };
@@ -7438,6 +7442,8 @@ let
   tokyotyrant = callPackage ../development/libraries/tokyo-tyrant { };
 
   tremor = callPackage ../development/libraries/tremor { };
+
+  uid_wrapper = callPackage ../development/libraries/uid_wrapper { };
 
   unicap = callPackage ../development/libraries/unicap {};
 
@@ -8298,11 +8304,10 @@ let
   samba3 = callPackage ../servers/samba/3.x.nix { };
 
   samba4 = callPackage ../servers/samba/4.x.nix {
+    libgcrypt = libgcrypt_1_6;
+    libiconv = if stdenv.isLinux then null else libiconv;
     python = python2;
     pythonPackages = python2Packages;
-    libiconv = if stdenv.isLinux then null else libiconv;
-    libgcrypt = libgcrypt_1_6;
-    glusterfs = null; # Broken in the current build
   };
 
   samba = samba4;
@@ -8322,7 +8327,7 @@ let
 
   samba4_light = lowPrio (samba4.override {
     # source3/wscript optionals
-    heimdal = null;
+    kerberos = null;
     openldap = null;
     cups = null;
     pam = null;
@@ -8330,7 +8335,6 @@ let
     acl = null;
     libaio = null;
     fam = null;
-    ctdb = null;
     ceph = null;
     glusterfs = null;
 
@@ -9527,6 +9531,10 @@ let
   mph_2b_damase = callPackage ../data/fonts/mph-2b-damase { };
 
   nafees = callPackage ../data/fonts/nafees { };
+
+  numix-icon-theme = callPackage ../data/icons/numix-icon-theme { };
+
+  numix-icon-theme-circle = callPackage ../data/icons/numix-icon-theme-circle { };
 
   oldstandard = callPackage ../data/fonts/oldstandard { };
 
@@ -12839,6 +12847,8 @@ let
   mate-icon-theme = callPackage ../misc/themes/mate-icon-theme { };
 
   mate-themes = callPackage ../misc/themes/mate-themes { };
+
+  numix-gtk-theme = callPackage ../misc/themes/gtk3/numix-gtk-theme { };
 
   plasma52 = recurseIntoAttrs (callPackage ../desktops/plasma-5.2 {
     qt5 = qt54;

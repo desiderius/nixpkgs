@@ -57,6 +57,9 @@ self: super: {
     '';
   });
 
+  # The package doesn't know about the AL include hierarchy.
+  al = appendConfigureFlag super.al "--extra-include-dirs=${pkgs.openal}/include/AL";
+
   # Depends on code distributed under a non-free license.
   bindings-yices = dontDistribute super.bindings-yices;
   yices = dontDistribute super.yices;
@@ -592,6 +595,21 @@ self: super: {
 
   # https://github.com/megantti/rtorrent-rpc/issues/1
   rtorrent-rpc = markBroken super.rtorrent-rpc;
+
+  # https://github.com/PaulJohnson/geodetics/issues/1
+  geodetics = dontCheck super.geodetics;
+
+  # https://github.com/AndrewRademacher/aeson-casing/issues/1
+  aeson-casing = dontCheck super.aeson-casing;
+
+  # https://github.com/junjihashimoto/test-sandbox-compose/issues/2
+  test-sandbox-compose = dontCheck super.test-sandbox-compose;
+
+  # Broken by GLUT update.
+  Monadius = markBroken super.Monadius;
+
+  # https://github.com/ddssff/cabal-debian/issues/35
+  cabal-debian = markBroken super.cabal-debian;
 
 } // {
 
