@@ -11111,6 +11111,8 @@ let
 
   openscad = callPackage ../applications/graphics/openscad {};
 
+  openvmtools = callPackage ../tools/system/open-vm-tools { };
+
   opera = callPackage ../applications/networking/browsers/opera {
     inherit (pkgs.kde4) kdelibs;
   };
