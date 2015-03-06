@@ -15,6 +15,8 @@ stdenv.mkDerivation rec {
   buildInputs = [ stdenv autoconf automake libtool pkgconfig glib pam ];
 
   preConfigure = ''
+    substituteInPlace lib/guestApp/guestApp.c --replace /etc/vmware-tools $out/etc/vmware-tools
+    substituteInPlace lib/misc/codeset.c --replace /etc/vmware-tools $out/etc/vmware-tools
     substituteInPlace scripts/Makefile.am --replace /etc/vmware-tools $out/etc/vmware-tools
     substituteInPlace services/vmtoolsd/Makefile.am --replace "\$(DESTDIR)/etc/vmware-tools" $out/etc/vmware-tools
     autoreconf -i
