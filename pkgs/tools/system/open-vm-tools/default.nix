@@ -1,5 +1,6 @@
 { stdenv, fetchurl, autoconf, automake, libtool, pkgconfig
 , glib, pam
+, icu
 }:
 
 stdenv.mkDerivation rec {
@@ -12,7 +13,7 @@ stdenv.mkDerivation rec {
     sha256 = "0yd0cjh8bg5drl2z3hh1i2151fhpf26v164hh15lw4hmh4ysimsl";
   };
 
-  buildInputs = [ stdenv autoconf automake libtool pkgconfig glib pam ];
+  buildInputs = [ stdenv autoconf automake libtool pkgconfig glib pam icu ];
 
   preConfigure = ''
     substituteInPlace lib/guestApp/guestApp.c --replace /etc/vmware-tools $out/etc/vmware-tools
@@ -33,8 +34,9 @@ stdenv.mkDerivation rec {
     "--without-gtkmm"
     "--without-procps"
     "--without-dnet"
-    "--without-icu"
   ];
+
+#    "--without-icu"
 
   NIX_CFLAGS_COMPILE="-Ilib/include -D_DEFAULT_SOURCE -Wno-deprecated-declarations -Wno-sizeof-pointer-memaccess";
 
