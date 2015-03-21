@@ -2,7 +2,7 @@
 , glib, pam
 , icu
 , libdnet
-, procps-old
+, procps
 }:
 
 stdenv.mkDerivation rec {
@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
     sha256 = "0yd0cjh8bg5drl2z3hh1i2151fhpf26v164hh15lw4hmh4ysimsl";
   };
 
-  buildInputs = [ stdenv autoconf automake libtool pkgconfig glib pam icu libdnet procps-old ];
+  buildInputs = [ stdenv autoconf automake libtool pkgconfig glib pam icu libdnet procps ];
 
   preConfigure = ''
     substituteInPlace lib/guestApp/guestApp.c --replace /etc/vmware-tools $out/etc/vmware-tools
@@ -35,6 +35,7 @@ stdenv.mkDerivation rec {
     "--without-gtk2"
     "--without-gtkmm"
     "--without-procps"
+    "CUSTOM_PROCPS_NAME=$procps"
   ];
 
 #    "--without-icu"
