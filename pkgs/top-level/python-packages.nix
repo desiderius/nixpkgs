@@ -9851,11 +9851,11 @@ let
 
 
   pyyaml = buildPythonPackage (rec {
-    name = "PyYAML-3.10";
+    name = "PyYAML-3.11";
 
     src = pkgs.fetchurl {
       url = "http://pyyaml.org/download/pyyaml/${name}.zip";
-      sha256 = "1r127fa354ppb667f4acxlzwxixap1jgzjrr790bw8mcpxv2hqaa";
+      sha256 = "1jbagwfs5is9fb7c5sfxhrri6yn1sp3kfbd6hkd8v1zga31kmfqr";
     };
 
     buildInputs = with self; [ pkgs.pyrex ];
